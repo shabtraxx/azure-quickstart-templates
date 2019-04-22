@@ -4,4 +4,4 @@
   <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
-This template provides a easy way to deploy Azure database for PostgreSQL with VNet Integration.
+This template provides a easy way to deploy Azure database for PostgreSQL with VNet Integration. The template also showcases how to use ARM template to set server parameters and set security policies like Advanced threat protection on the server. In the template, we set the server parameter log_min_messages to INFO and set Advanced threat protection ON by default when the server is provisioned using the template.
