@@ -200,6 +200,22 @@
                     "dependsOn": [
                         "[concat('Microsoft.DBforPostgreSQL/servers/', parameters('serverName'))]"
                     ]
+                },
+                {
+                    "name": "Default",
+                    "type": "securityAlertPolicies",
+                    "apiVersion": "2017-12-01",
+                    "properties": {
+                        "state": "Enabled",
+                        "disabledAlerts": [],
+                        "emailAddresses": [
+                            ""
+                        ],
+                        "emailAccountAdmins": "true"
+                    },
+                    "dependsOn": [
+                        "[concat('Microsoft.DBforPostgreSQL/servers/', parameters('serverName'))]"
+                    ]
                 }
             ],
             "properties": {
