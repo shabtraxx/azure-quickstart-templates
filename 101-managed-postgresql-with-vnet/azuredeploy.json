@@ -5,7 +5,7 @@
     "serverName": {
       "type": "string",
       "metadata": {
-        "description": "Server Name for Azure database for MySQL"
+        "description": "Server Name for Azure database for PostgreSQL"
       }
     },
     "administratorLogin": {
@@ -33,21 +33,21 @@
         32
       ],
       "metadata": {
-        "description": "Azure database for MySQL compute capacity in vCores (2,4,8,16,32)"
+        "description": "Azure database for PostgreSQL compute capacity in vCores (2,4,8,16,32)"
       }
     },
     "skuName": {
       "type": "string",
       "defaultValue": "GP_Gen5_2",
       "metadata": {
-        "description": "Azure database for MySQL sku name "
+        "description": "Azure database for PostgreSQL sku name "
       }
     },
     "SkuSizeMB": {
       "type": "int",
       "defaultValue": 5120,
       "metadata": {
-        "description": "Azure database for MySQL Sku Size "
+        "description": "Azure database for PostgreSQL Sku Size "
       }
     },
     "SkuTier": {
@@ -58,25 +58,25 @@
         "MemoryOptimized"
       ],
       "metadata": {
-        "description": "Azure database for MySQL pricing tier"
+        "description": "Azure database for PostgreSQL pricing tier"
       }
     },
     "skuFamily": {
       "type": "string",
       "defaultValue": "Gen5",
       "metadata": {
-        "description": "Azure database for MySQL sku family"
+        "description": "Azure database for PostgreSQL sku family"
       }
     },
     "mysqlVersion": {
       "type": "string",
       "allowedValues": [
-        "5.6",
-        "5.7"
+        "9.6",
+        "10.0"
       ],
-      "defaultValue": "5.7",
+      "defaultValue": "9.6",
       "metadata": {
-        "description": "MySQL version"
+        "description": "PostgreSQL version"
       }
     },
     "location": {
@@ -90,7 +90,7 @@
       "type": "int",
       "defaultValue": 7,
       "metadata": {
-        "description": "MySQL Server backup retention days"
+        "description": "PostgreSQL Server backup retention days"
       }
     },
     "geoRedundantBackup": {
@@ -102,14 +102,14 @@
     },
     "virtualNetworkName": {
       "type": "string",
-      "defaultValue": "azure_mysql_vnet",
+      "defaultValue": "azure_pgsql_vnet",
       "metadata": {
         "description": "Virtual Network Name"
       }
     },
     "subnetName": {
       "type": "string",
-      "defaultValue": "azure_mysql_subnet",
+      "defaultValue": "azure_pgsql_subnet",
       "metadata": {
         "description": "Subnet Name"
       }
@@ -166,7 +166,7 @@
     },
     {
       "apiVersion": "2017-12-01",
-      "type": "Microsoft.DBforMySQL/servers",
+      "type": "Microsoft.DBforPostgreSQL/servers",
       "location": "[parameters('location')]",
       "name": "[parameters('serverName')]",
       "sku": {
@@ -186,7 +186,7 @@
             "ignoreMissingVnetServiceEndpoint": true
           },
           "dependsOn": [
-            "[concat('Microsoft.DBforMySQL/servers/', parameters('serverName'))]"
+            "[concat('Microsoft.DBforPostgreSQL/servers/', parameters('serverName'))]"
           ]
         }
       ],
