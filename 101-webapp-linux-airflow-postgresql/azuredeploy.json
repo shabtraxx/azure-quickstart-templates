@@ -2,6 +2,10 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
+        "dockerRegistryUsername": {"type": "string"},
+        "dockerRegistryPassword": {"type": "securestring"},
+        "dockerRegistryUrl": {"type": "string"},
+        "dockerContainer": {"type": "string"},
     "siteName": {
       "type": "string",
       "defaultValue": "[concat('airflow-', uniqueString(resourceGroup().id))]",
@@ -157,7 +161,7 @@
       ],
       "properties": {
         "siteConfig": {
-          "linuxFxVersion": "DOCKER|puckel/docker-airflow:latest"
+          "linuxFxVersion": "[concat('DOCKER|',  parameters('dockerContainer'))]"
         },
         "name": "[parameters('siteName')]",
         "serverFarmId": "[variables('hostingPlanName')]",
@@ -178,7 +182,10 @@
           "properties": {
             "AIRFLOW__CORE__SQL_ALCHEMY_CONN": "[concat('postgresql://', variables('AirflowUserName'),':',parameters('administratorLoginPassword'),'@',reference(resourceId('Microsoft.DBforPostgreSQL/servers',variables('serverName'))).fullyQualifiedDomainName,':5432/',variables('databaseName'))]",
             "AIRFLOW__CORE__LOAD_EXAMPLES": "true",
-            "WEBSITES_ENABLE_APP_SERVICE_STORAGE": "true"
+            "WEBSITES_ENABLE_APP_SERVICE_STORAGE": "true",
+            "DOCKER_REGISTRY_SERVER_URL": "[concat('https://', parameters('dockerRegistryUrl'))]", 
+            "DOCKER_REGISTRY_SERVER_USERNAME": "[parameters('dockerRegistryUsername')]",     
+            "DOCKER_REGISTRY_SERVER_PASSWORD": "[parameters('dockerRegistryPassword')]"
           }
         }
       ]
